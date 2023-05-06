@@ -54,13 +54,12 @@ JOIN singers s ON s.id = sa.singer_id
 JOIN genresinger gs ON s.id = gs.singer_id 
 WHERE gs.genre_id = 3
 
-SELECT album_name an  FROM albums a
+SELECT DISTINCT album_name FROM albums a
 JOIN singersalbums sa ON sa.album_id = a.id
-JOIN singers s ON s.id = sa.singer_id
-JOIN genresinger gs ON gs.SINGER_ID = s.id
-GROUP BY an
-HAVING COUNT(gs.singer_id) > 1
-ORDER BY an;
+JOIN genresinger gs ON gs.SINGER_ID = sa.singer_id
+GROUP BY a.id, gs.singer_id
+HAVING COUNT(gs.genre_id) > 1
+ORDER BY album_name;
 
 SELECT track_name FROM tracks 
 EXCEPT 
